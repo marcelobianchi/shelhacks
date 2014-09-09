@@ -11,7 +11,7 @@ function help() {
 cat <<EOF
 
 ${bold}doall.sh${reset}: Make scripts for SeismicHandler data processing
-          Marcelo Bianchi <mbianchi -at- iag.usp.br>
+          Marcelo Bianchi <m.bianchi@iag.usp.br>
 
 Usage: ${bold}doall.sh${reset} <Pattern> <Code> [Mode]
 	
@@ -39,7 +39,7 @@ EOF
 pattern="$1" && shift
 
 [ -z "$1" ] && echo "No code found." && exit 1 
-code=$1 && shift
+code=$(echo $1 | sed -e 's/"/\\"/g' | sed -e 's/#/\\#/g' | sed -e 's/(/\\(/g' | sed -e 's/;/\\;/g' | sed -e 's/)/\\)/g') && shift
 
 [ -z "$1" ] && mode=C || mode="$1"
 
